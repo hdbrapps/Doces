@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Catálogo de Doces</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="http://www.wilmafestas.com.br/img/icon_doce.png" type="image/x-icon">
+	<link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+  <div class="header">
+    <button id="toggle-theme">
+      <span class="fas fa-moon" id="theme-noturno"></span>
+    </button>
+    
+
+	<h1>Catálogo de Doces</h1>
+	<div class="catalogo">
+		<div class="produto">
+			<img src="https://d1ih8jugeo2m5m.cloudfront.net/2022/04/como-calcular-preco-de-doce-para-vender.jpg" alt="Doce1">
+			<h2>Doce 1</h2>
+			<p>Descrição do doce 1</p>
+			<p>R$ 10,00</p>
+			<button class="btn-comprar" data-produto="Doce 1" data-preco="10.00">Comprar</button>
+		</div>
+		<div class="produto">
+			<img src="https://cdn0.casamentos.com.br/article-vendor/7908/original/1280/jpg/isaaustin-109_13_327908-163560003856181.jpeg" alt="Doce2">
+			<h2>Doce 2</h2>
+			<p>Descrição do doce 2</p>
+			<p>R$ 12,00</p>
+			<button class="btn-comprar" data-produto="Doce 2" data-preco="12.00">Comprar</button>
+		</div>
+		<div class="produto">
+			<img src="https://www.qgjeitinhocaseiro.com/wp-content/uploads/2020/02/alimentos-agridoces.jpg" alt="Doce3">
+			<h2>Doce 3</h2>
+			<p>Descrição do doce 3</p>
+			<p>R$ 15,00</p>
+			<button class="btn-comprar" data-produto="Doce 3" data-preco="15.00">Comprar</button>
+		</div>
+	</div>
+	<div class="carrinho">
+		<h2>Carrinho de Compras</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Produto</th>
+					<th>Quantidade</th>
+					<th>Preço</th>
+					<th>Remover</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2">Total:</td>
+					<td class="total">R$ 0,00</td>
+					<td></td>
+				</tr>
+			</tfoot>
+		</table>
+		<div class="enviar-pedido">
+			<label for="nome">Seu Nome:</label>
+			<input type="text" id="nome" name="nome">
+			<label for="pedido">Seu Pedido:</label>
+			<input type="text" id="pedido" name="pedido" readonly>
+			<button class="btn-pedido">Enviar Pedido</button>
+		</div>
+	</div>
+	<script src="/js/app.js"></script>
+</body>
+</html>
