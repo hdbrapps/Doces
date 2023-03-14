@@ -1,124 +1,150 @@
-const catalogo = document.querySelector('.catalogo');
-const carrinho = document.querySelector('.carrinho');
-const tbody = carrinho.querySelector('tbody');
-const total = carrinho.querySelector('.total');
-const enviarPedidoBtn = carrinho.querySelector('.btn-pedido');
-const inputPedido = document.querySelector('#seu-pedido');
+const btnComprar = document.querySelectorAll('.btn-comprar');
+const carrinho = document.querySelector('.carrinho tbody');
+const total = document.querySelector('.total');
+const enviarPedido = document.querySelector('.enviar-pedido');
+const btnPedido = document.querySelector('.btn-pedido');
+const inputNome = document.querySelector('#nome');
+const inputPedido = document.querySelector('#pedido');
+const btnToggleTheme = document.querySelector('#toggle-theme');
+const themeNoturno = document.querySelector('#theme-noturno');
 
-let carrinhoItens = [];
 
-catalogo.addEventListener('click', (event) => {
-  if (event.target.tagName === 'BUTTON') {
-    const produto = event.target.getAttribute('data-produto');
-    const preco = Number(event.target.getAttribute('data-preco'));
+let qtdeProdutos = 0;
+let valorTotal = 0;
 
-    adicionarItemCarrinho(produto, preco);
-  }
-});
+btnComprar.forEach((btn) => {
+  btn.addEventListener('click', (event) => {
+    const produto = event.target.dataset.produto;
+    const preco = parseFloat(event.target.dataset.preco);
 
-carrinho.addEventListener('click', (event) => {
-  if (event.target.tagName === 'BUTTON') {
-    const id = event.target.getAttribute('data-id');
-    removerItemCarrinho(id);
-  }
-});
-
-enviarPedidoBtn.addEventListener('click', enviarPedidoWhatsapp);
-
-function adicionarItemCarrinho(produto, preco) {
-  const item = carrinhoItens.find((item) => item.produto === produto);
-
-  if (item) {
-    item.quantidade++;
-    item.preco = item.quantidade * preco;
-    document.getElementById(item.id).textContent = item.quantidade;
-  } else {
-    const id = Date.now();
-    carrinhoItens.push({ id, produto, quantidade: 1, preco });
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${produto}</td>
-      <td id="${id}">1</td>
-      <td>R$ ${preco.toFixed(2)}</td>
-      <td><button data-id="${id}">Remover</button></td>
-    `;
-    tbody.appendChild(tr);
-  }
-
-  const botoesRemover = document.querySelectorAll('.carrinho button[data-id]');
-  botoesRemover.forEach(botao => {
-    botao.addEventListener('click', (event) => {
-      const id = event.target.getAttribute('data-id');
-      removerItemCarrinho(id);
-    });
+    adicionarProduto(produto, preco);
   });
+});
+
+function adicionarProduto(produto, preco) {
+  qtdeProdutos++;
+  valorTotal += preco;
+
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${produto}</td>
+    <td>1</td>
+    <td>R$ ${preco.toFixed(2)}</td>
+    <td><button class="btn-remover">Remover</button></td>
+  `;
+
+  carrinho.append(tr);
 
   atualizarTotal();
   atualizarPedido();
 }
 
-function removerItemCarrinho(id) {
-  const itemIndex = carrinhoItens.findIndex((item) => item.id === Number(id));
-  
-  if (itemIndex !== -1) {
-    carrinhoItens.splice(itemIndex, 1);
+function removerProduto(tr) {
+  const preco = parseFloat(tr.querySelector('td:nth-child(3)').textContent.replace('R$ ', ''));
 
-    const tr = event.target.closest('tr');
-    tr.parentNode.removeChild(tr);
-    
-    atualizarTotal();
-    atualizarPedido();
-  }
+  qtdeProdutos--;
+  valorTotal -= preco;
+
+  tr.remove();
+
+  atualizarTotal();
+  atualizarPedido();
 }
 
 function atualizarTotal() {
-  const totalCarrinho = carrinhoItens.reduce((acc, item) => acc + item.preco, 0);
-  total.textContent = `R$ ${totalCarrinho.toFixed(2)}`;
+  total.textContent = `R$ ${valorTotal.toFixed(2)}`;
 }
 
 function atualizarPedido() {
-  const pedido = carrinhoItens.map(item => `${item.quantidade}x ${item.produto}`).join(', ');
-document.getElementById('pedido').value = pedido;
+  let pedido = '';
 
+  carrinho.querySelectorAll('tr').forEach((tr) => {
+    const produto = tr.querySelector('td:nth-child(1)').textContent;
+    const preco = tr.querySelector('td:nth-child(3)').textContent;
+    const qtde = tr.querySelector('td:nth-child(2)').textContent;
+
+    pedido += `${produto} (${qtde}) - ${preco}\n`;
+  });
+
+  inputPedido.value = pedido;
 }
 
-function enviarPedidoWhatsapp() {
-  const nome = document.getElementById('nome').value;
-  const pedido = carrinhoItens.map(item => `${item.quantidade}x ${item.produto}`).join(', ');
-  const totalCarrinho = carrinhoItens.reduce((acc, item) => acc + item.preco, 0).toFixed(2);
-  const mensagem = `Olá, meu nome é ${nome} e gostaria de fazer o seguinte pedido: ${pedido}. Total: R$ ${totalCarrinho}`;
-
-  const numeroTelefone = '5598970180089';
-  const linkWhatsapp = `https://wa.me/${numeroTelefone}?text=${encodeURIComponent(mensagem)}`;
-
-  const link = document.createElement('a');
-  link.setAttribute('href', linkWhatsapp);
-  link.setAttribute('target', '_blank');
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-
- const toggleThemeButton = document.getElementById('toggle-theme');
-const body = document.body;
-
-toggleThemeButton.addEventListener('click', function() {
-  body.classList.toggle('dark-mode');
+carrinho.addEventListener('click', (event) => {
+  if (event.target.classList.contains('btn-remover')) {
+    const tr = event.target.closest('tr');
+    removerProduto(tr);
+  }
 });
 
-const slider = document.querySelector('.slider');
-const sliderTexts = ['Deliciosos Doces', 'Doces Feitos com Amor', 'Compre Doces Agora'];
-
-let index = 0;
-
-setInterval(() => {
-  slider.classList.remove('animate');
-  slider.textContent = sliderTexts[index];
-  slider.classList.add('animate');
-  
-  index++;
-  if (index === sliderTexts.length) {
-    index = 0;
+btnPedido.addEventListener('click', () => {
+  const nome = inputNome.value.trim();
+  const pedido = inputPedido.value.trim();
+//Alerta para colocar o nome
+  if (nome === '') {
+    alert('Por favor, informe seu nome.');
+    inputNome.focus();
+    return;
   }
-}, 3000);
+// Alerta carrinho vazio
+  if (pedido === '') {
+    alert('Seu carrinho está vazio. Adicione produtos antes de enviar seu pedido.');
+    return;
+  }
+  
+
+  // Gerar código aleatório
+  const codigo = Math.floor(Math.random() * 900000) + 100000;
+
+
+// Adicionar código à mensagem
+const mensagem = `Olá, meu nome é ${nome} e gostaria de fazer o seguinte pedido:\n\n${pedido}\nCódigo do pedido: ${codigo}`;
+criarCheckout();
+// Link do whatsApp
+  const url = `https://api.whatsapp.com/send?phone=5598970180089&text=${encodeURIComponent(mensagem)}`;
+  window.open(url, '_blank');
+
+  inputNome.value = '';
+  inputPedido.value = '';
+
+  qtdeProdutos = 0;
+  valorTotal = 0;
+  carrinho.querySelectorAll('tr').forEach((tr) => tr.remove());
+  atualizarTotal();
+});
+// Tema noturno
+btnToggleTheme.addEventListener('click', () => {
+  document.body.classList.toggle('theme-noturno');
+  btnToggleTheme.querySelector('span').classList.toggle('fa-moon');
+  btnToggleTheme.querySelector('span').classList.toggle('fa-sun');
+});
+
+const toggleThemeBtn = document.getElementById('toggle-theme');
+const bodyEl = document.querySelector('body');
+
+toggleThemeBtn.addEventListener('click', function() {
+  bodyEl.classList.toggle('dark-mode');
+});
+//Final do tema
+// Função atualizar pedido
+function atualizarPedido() {
+  let pedido = '';
+  const pagamento = document.querySelector('#pagamento').value;
+
+  carrinho.querySelectorAll('tr').forEach((tr) => {
+    const produto = tr.querySelector('td:nth-child(1)').textContent;
+    const preco = tr.querySelector('td:nth-child(3)').textContent;
+    const qtde = tr.querySelector('td:nth-child(2)').textContent;
+
+    pedido += `${produto} (${qtde}) - ${preco}\n`;
+  });
+
+  pedido += ` Forma de pagamento: ${pagamento}\n`;
+  pedido += ` Total do pedido: R$ ${valorTotal.toFixed(2)}`;
+
+  inputPedido.value = pedido;
+}
+
+
+
+
+
