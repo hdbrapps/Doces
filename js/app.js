@@ -98,7 +98,7 @@ btnPedido.addEventListener('click', () => {
 
 // Adicionar código à mensagem
 const mensagem = `Olá, meu nome é ${nome} e gostaria de fazer o seguinte pedido:\n\n${pedido}\nCódigo do pedido: ${codigo}`;
-criarCheckout();
+
 // Link do whatsApp
   const url = `https://api.whatsapp.com/send?phone=5598970180089&text=${encodeURIComponent(mensagem)}`;
   window.open(url, '_blank');
