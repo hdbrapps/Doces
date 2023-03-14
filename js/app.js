@@ -106,3 +106,19 @@ const body = document.body;
 toggleThemeButton.addEventListener('click', function() {
   body.classList.toggle('dark-mode');
 });
+
+const slider = document.querySelector('.slider');
+const sliderTexts = ['Deliciosos Doces', 'Doces Feitos com Amor', 'Compre Doces Agora'];
+
+let index = 0;
+
+setInterval(() => {
+  slider.classList.remove('animate');
+  slider.textContent = sliderTexts[index];
+  slider.classList.add('animate');
+  
+  index++;
+  if (index === sliderTexts.length) {
+    index = 0;
+  }
+}, 3000);
