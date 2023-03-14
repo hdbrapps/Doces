@@ -13,21 +13,43 @@
     <button id="toggle-theme">
       <span class="fas fa-moon" id="theme-noturno"></span>
     </button>	  
-	<h1 class="slider">Catálogo de Doces</h1>
+	<h1 class="slider">Teste Confeitaria</h1>
+	
 	<div class="catalogo">
 		<div class="produto">
 			<img src="https://d1ih8jugeo2m5m.cloudfront.net/2022/04/como-calcular-preco-de-doce-para-vender.jpg" alt="Doce1">
-			<h2>Doce 1</h2>
+			<h2>Brigadeiro</h2>
 			<p>Descrição do doce 1</p>
 			<p>R$ 10,00</p>
-			<button class="btn-comprar" data-produto="Doce 1" data-preco="10.00">Comprar</button>
+			<button class="btn-comprar" data-produto="Brigadeiro" data-preco="10.00">Adicionar</button>
 		</div>
 		<div class="produto">
-			<img src="https://cdn0.casamentos.com.br/article-vendor/7908/original/1280/jpg/isaaustin-109_13_327908-163560003856181.jpeg" alt="Doce2">
-			<h2>Doce 2</h2>
-			<p>Descrição do doce 2</p>
-			<p>R$ 12,00</p>
-			<button class="btn-comprar" data-produto="Doce 2" data-preco="12.00">Comprar</button>
+			<img src="https://i.pinimg.com/originals/36/6b/2a/366b2a2b560d6f2e9070e98fe4944a21.jpg" alt="Doce2">
+			<h2>Bolo</h2>
+			<p>O kg</p>
+			<p>R$ 70,00</p>
+			<button class="btn-comprar" data-produto="Bolo" data-preco="70.00">Adicionar</button>
+		</div>
+		<div class="produto">
+			<img src="https://img.clasf.com.br/2017/12/22/Rei-do-brotinho-20171222162633.jpg" alt="Doce3">
+			<h2>Brotinhos</h2>
+			<p>O cento</p>
+			<p>R$ 100,00</p>
+			<button class="btn-comprar" data-produto="Brotinho" data-preco="100.00">Adicionar</button>
+		</div>
+		<div class="produto">
+			<img src="https://jacomel.confeitaria2irmaos.com.br/wp-content/uploads/2021/03/base-produto-site-mistofrito.png" alt="Doce3">
+			<h2>Salgados</h2>
+			<p>O cento</p>
+			<p>R$ 40,00</p>
+			<button class="btn-comprar" data-produto="Salgados" data-preco="40.00">Adicionar</button>
+		</div>
+		<div class="produto">
+			<img src="https://www.qgjeitinhocaseiro.com/wp-content/uploads/2020/02/alimentos-agridoces.jpg" alt="Doce3">
+			<h2>Doce 3</h2>
+			<p>Descrição do doce 3</p>
+			<p>R$ 15,00</p>
+			<button class="btn-comprar" data-produto="Doce 3" data-preco="15.00">Comprar</button>
 		</div>
 		<div class="produto">
 			<img src="https://www.qgjeitinhocaseiro.com/wp-content/uploads/2020/02/alimentos-agridoces.jpg" alt="Doce3">
@@ -59,14 +81,22 @@
 			</tfoot>
 		</table>
 		<div class="enviar-pedido">
+			<label for="pagamento"><h3>Formas de Pagamento:</h3></label>
+			<select id="pagamento" name="pagamento">
+			  <option value="credito |">Cartão de Crédito</option>
+			  <option value="debito |">Cartão de Debito</option>
+			  <option value="pix |">Pix</option>
+			  <option value="dinheiro |">Dinheiro</option>
+			</select>
 			<label for="nome">Seu Nome:</label>
 			<input type="text" id="nome" name="nome">
+		
+			  
 			<label for="pedido">Seu Pedido:</label>
 			<input type="text" id="pedido" name="pedido" readonly>
 			<button class="btn-pedido">Enviar Pedido</button>
-		</div>
-	</div>
-  
+		  </div>
+		  
 	<script src="/js/app.js"></script>
 </body>
 </html>
