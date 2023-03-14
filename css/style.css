@@ -149,6 +149,7 @@ textarea {
   color: #fff;
   margin-bottom: 10px;
   width: 100%;
+  text-align: center;
 }
 
 input[type="submit"] {
@@ -219,3 +220,27 @@ button {
     }
   }
   
+  /* estilo para o modo claro */
+body {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* estilo para o modo escuro */
+body.dark-mode {
+  background-color: #333;
+  color: #f5f5f5;
+}
+
+#pagamento {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #333;
+  font-size: 16px;
+  padding: 8px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
