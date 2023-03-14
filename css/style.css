@@ -204,4 +204,18 @@ button {
 	background-image: url('https://cdn-icons-png.flaticon.com/512/4572/4572055.png');
   }
 
+  .slider.animate {
+    animation: slide 1s ease-in-out;
+  }
+  
+  @keyframes slide {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
   
