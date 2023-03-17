@@ -144,7 +144,45 @@ function atualizarPedido() {
   inputPedido.value = pedido;
 }
 
+const horaAbertura = 8; // 9 horas
+const horaFechamento = 9; // 18 horas (ou 6pm)
 
 
+
+function estaAberto() {
+  const agora = new Date();
+  const horaAtual = agora.getHours();
+
+  if (horaAtual >= horaAbertura && horaAtual < horaFechamento) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+const botaoStatus = document.getElementById('status');
+
+function atualizarStatus() {
+  if (estaAberto()) {
+    botaoStatus.textContent = 'Aberto';
+    botaoStatus.classList.remove('fechado');
+    botaoStatus.classList.add('aberto');
+  } else {
+    botaoStatus.textContent = 'Fechado';
+    botaoStatus.classList.remove('aberto');
+    botaoStatus.classList.add('fechado');
+  }
+}
+
+atualizarStatus(); // atualizar o status ao carregar a página
+
+botaoStatus.addEventListener('click', () => {
+  if (estaAberto()) {
+    alert('O estabelecimento já está aberto!');
+  } else {
+    alert('O estabelecimento foi Fechado!');
+    atualizarStatus();
+  }
+});
 
 
