@@ -245,13 +245,23 @@ body.dark-mode {
 }
 
 .aberto {
-  background-color: #28a745;
-  color: #fff;
+  font-size: 100%;
+    /* background-color: #27c24c; */
+    background-color: #fff;
+    color: #008b00;
+    font-weight: bold;
+    padding: 0.2em 0.6em 0.3em
+    
 }
 
 .fechado {
-  background-color: #dc3545;
-  color: #fff;
+  font-size: 100%;
+    /* background-color: #f05050; */
+    background-color: #fff;
+    color: #ff0000;
+    font-weight: bold;
+    padding: 0.2em 0.6em 0.3em
+    
 }
 
 .btn-horario {
@@ -261,5 +271,39 @@ body.dark-mode {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+
+#status {
+  display: block;
+  margin: 0 auto;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  max-width: 100%;
+  width: 200px;
+}
+
+#status.aberto {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border-color: #4CAF50;
+}
+
+#status.fechado {
+  background-color: #ff0000a8;
+  color: #ffffff;
+  border-color: #ff00008b;
+}
+
+.btn-comprar[disabled] {
+  background-color: gray; /* cor de fundo do botão quando desativado */
+  cursor: not-allowed; /* cursor do mouse ao passar sobre o botão desativado */
 }
 
