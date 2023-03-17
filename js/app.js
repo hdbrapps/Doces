@@ -144,8 +144,8 @@ function atualizarPedido() {
   inputPedido.value = pedido;
 }
 
-const horaAbertura = 8; // 9 horas
-const horaFechamento = 9; // 18 horas (ou 6pm)
+const horaAbertura = 13; // 9 horas
+const horaFechamento = 18; // 18 horas (ou 6pm)
 
 
 
@@ -164,16 +164,33 @@ const botaoStatus = document.getElementById('status');
 
 function atualizarStatus() {
   if (estaAberto()) {
-    botaoStatus.textContent = 'Aberto';
+    botaoStatus.textContent = 'Aberto agora';
     botaoStatus.classList.remove('fechado');
     botaoStatus.classList.add('aberto');
   } else {
-    botaoStatus.textContent = 'Fechado';
+    botaoStatus.textContent = 'Fechado agora';
     botaoStatus.classList.remove('aberto');
     botaoStatus.classList.add('fechado');
   }
+  
 }
+// Seleciona todos os elementos do HTML com a classe 'btn-comprar' e armazena em uma constante.
+const botoesComprar = document.querySelectorAll('.btn-comprar');
 
+// Chama uma função que retorna um booleano indicando se a loja está aberta ou não, e armazena o resultado em uma constante.
+const lojaAberta = estaAberto();
+
+// Itera por todos os botões de compra encontrados e verifica se a loja está aberta.
+botoesComprar.forEach((botao) => {
+// Se a loja estiver aberta, remove o atributo 'disabled' do botão para habilitá-lo.
+if (lojaAberta) {
+botao.removeAttribute('disabled');
+}
+// Caso contrário, adiciona o atributo 'disabled' ao botão para desabilitá-lo.
+else {
+botao.setAttribute('disabled', 'disabled');
+}
+});
 atualizarStatus(); // atualizar o status ao carregar a página
 
 botaoStatus.addEventListener('click', () => {
@@ -184,5 +201,13 @@ botaoStatus.addEventListener('click', () => {
     atualizarStatus();
   }
 });
+
+$(document).ready(function() {
+  // Show/hide shopping cart on button click
+  $('.btn-carrinho').click(function() {
+    $('.carrinho').toggleClass('hidden');
+  });
+});
+
 
 
