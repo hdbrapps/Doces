@@ -171,7 +171,7 @@ button {
 	background-color: #ff7b7b;
 	color: #fff;
 	border: none;
-	border-radius: 10rem;
+	border-radius: 1rem;
 	padding: 10px 15px;
 	font-size: 1.2rem;
 	cursor: pointer;
@@ -242,5 +242,24 @@ body.dark-mode {
   width: 100%;
   max-width: 300px;
   margin-bottom: 20px;
+}
+
+.aberto {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.fechado {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-horario {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
